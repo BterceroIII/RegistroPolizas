@@ -1,0 +1,78 @@
+﻿
+@{
+    ViewData["Title"] = "Circulaciones";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3 bg-second-primary">
+        <h6 class="m-0 font-weight-bold text-white">Lista de Circulaciones</h6>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-3">
+                <button class="btn btn-success" data-toggle="modal" data-target="#modalData"><i class="fas fa-plus-circle"></i> Nueva Circulacion</button>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-sm-12">
+                <table class="table table-bordered" id="tbdata" cellspacing="0" style="width:100%">
+                    <thead>
+                        @* <tr>
+                        <th>Id</th>
+                        <th>Imagen</th>
+                        <th>Nombres</th>
+                        <th>Apellidos</th>
+                        <th>Telefono</th>
+                        <th>Cedula</th>
+                        <th>Direccion</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                        </tr>*@
+                    </thead>
+                    <tbody>
+                        @*<tr>
+                        <td>1</td>
+                        <td><img style="height:60px ;" src="https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=300" class="rounded mx-auto d-block" /></td>
+                        <td>Byron </td>
+                        <td>Tercero</td>
+                        <td>89864613</td>
+                        <td>0805001w</td>
+                        <td>Ticuantepe,Managua</td>
+                        <td><span class="badge badge-info">Activo</span></td>
+                        <td>
+                        <button class="btn btn-primary btn-sm">
+                        <i class="fas fa-pencil-alt"></i>
+                        </button>
+                        <button class="btn btn-danger btn-sm">
+                        <i class="fas fa-trash-alt"></i>
+                        </button>
+                        </td>
+                        </tr>
+                        <tr>
+                        <td>2</td>
+                        <td><img style="height:60px ;" src="https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=300" class="rounded mx-auto d-block" /></td>
+                        <td>Diego </td>
+                        <td>Borda</td>
+                        <td>89864613</td>
+                        <td>0805001w</td>
+                        <td>Nose donde,Managua</td>
+                        <td><span class="badge badge-info">Activo</span></td>
+                        <td>
+                        <button class="btn btn-primary btn-sm">
+                        <i class="fas fa-pencil-alt"></i>
+                        </button>
+                        <button class="btn btn-danger btn-sm">
+                        <i class="fas fa-trash-alt"></i>
+                        </button>
+                        </td>
+                        </tr>*@
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
