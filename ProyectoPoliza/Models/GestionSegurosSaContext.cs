@@ -29,9 +29,7 @@ public partial class GestionSegurosSaContext : DbContext
 
     public virtual DbSet<Vehiculo> Vehiculos { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-
-        => optionsBuilder.UseSqlServer("Server=BTERCERO\\SQLEXPRESS; DataBase=Gestion_SegurosSA; Trusted_Connection=True; TrustServerCertificate=True;");
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) { }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -168,12 +166,10 @@ public partial class GestionSegurosSaContext : DbContext
                 .HasMaxLength(20)
                 .IsUnicode(false);
             entity.Property(e => e.IdEmpleado).HasColumnName("idEmpleado");
-            entity.Property(e => e.Nombre)
+            entity.Property(e => e.Correo)
                 .HasMaxLength(100)
                 .IsUnicode(false);
-            entity.Property(e => e.Rol)
-                .HasMaxLength(50)
-                .IsUnicode(false);
+           
 
             entity.HasOne(d => d.IdEmpleadoNavigation).WithMany(p => p.Usuarios)
                 .HasForeignKey(d => d.IdEmpleado)
