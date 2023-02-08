@@ -15,7 +15,7 @@ namespace ProyectoPoliza.Servicios.Implementacion
 
         public async Task<Usuario> GetUsuario(string correo, string clave)
         {
-            Usuario usuario_encontrado = await _SeguroContext.Usuarios.Where(u => u.Correo == correo && u.Contraseña == clave)
+            Usuario usuario_encontrado = await _SeguroContext.Usuarios.Where(u => u.Correo == correo && u.Contraseña == clave).Include(c => c.oEmpleado)
                 .FirstOrDefaultAsync();
 
             return usuario_encontrado;
