@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 using ProyectoPoliza.Models;
 using ProyectoPoliza.Recursos;
@@ -13,10 +15,12 @@ namespace ProyectoPoliza.Controllers
     public class InicioController : Controller
     {
         private readonly IUsuarioService _usuarioService;
+        private readonly GestionSegurosSaContext _gestionSegurosSaContext;
 
-        public InicioController(IUsuarioService usuarioService)
+        public InicioController(IUsuarioService usuarioService, GestionSegurosSaContext gestionSegurosSaContext)
         {
             _usuarioService = usuarioService;   
+            _gestionSegurosSaContext = gestionSegurosSaContext;   
         }
 
         public IActionResult Registrarse() 
@@ -58,7 +62,7 @@ namespace ProyectoPoliza.Controllers
 
             List<Claim> claims = new List<Claim>()
             {
-                new Claim(ClaimTypes.Name, usuario_encontrado.Correo)
+                new Claim(ClaimTypes.Name, usuario_encontrado.oEmpleado.Nombre)
             };
 
             ClaimsIdentity claimsIdentity= new ClaimsIdentity(claims,

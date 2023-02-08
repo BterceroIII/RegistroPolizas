@@ -23,8 +23,11 @@
                     <div class="card-body">
                         <form asp-controller="Inicio" asp-action="Registrarse" method="post">
 
-                            <input class="form-control mb-3" type="text" placeholder="NombreCompleto" asp-for="IdEmpleadoNavigation.Nombre" required />
-                            <input class="form-control mb-3" type="text" placeholder="Correo" asp-for="Correo" required />
+                            <input class="form-control mb-3" type="text" placeholder="Nombre Completo" asp-for="oEmpleado.Nombre" required />
+                            <input class="form-control mb-3" type="text" placeholder="N Cedula" asp-for="oEmpleado.Cedula" required />
+                            <input class="form-control mb-3" type="number" placeholder="Telefono" asp-for="oEmpleado.Telefono" required />
+                            <input class="form-control mb-3" type="text" placeholder="Cargo" asp-for="oEmpleado.Cargo" required />
+                            <input class="form-control mb-3" type="email" placeholder="Correo" asp-for="Correo" required />
                             <input class="form-control mb-3" type="password" placeholder="Contraseña" asp-for="Contraseña" required />
 
                             <div class="d-grid gap-2 mb-3">
