@@ -171,7 +171,7 @@ public partial class GestionSegurosSaContext : DbContext
                 .IsUnicode(false);
            
 
-            entity.HasOne(d => d.IdEmpleadoNavigation).WithMany(p => p.Usuarios)
+            entity.HasOne(d => d.oEmpleado).WithMany(p => p.Usuarios)
                 .HasForeignKey(d => d.IdEmpleado)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Usuarios_Empleados");

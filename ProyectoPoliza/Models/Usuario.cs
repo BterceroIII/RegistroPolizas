@@ -15,5 +15,5 @@ public partial class Usuario
 
     public int? Eliminado { get; set; }
 
-    public virtual Empleado IdEmpleadoNavigation { get; set; } = null!;
+    public virtual Empleado oEmpleado { get; set; } = null!;
 }
