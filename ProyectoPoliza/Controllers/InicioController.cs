@@ -59,6 +59,12 @@ namespace ProyectoPoliza.Controllers
                 ViewData["Mensaje"] = "No se encontro coincidencias";
                 return View();
             }
+            else if (usuario_encontrado.Eliminado != 0)
+            {
+                ViewData["Mensaje"] = "El Usuario esta inactivo";
+                return View();
+            }
+           
 
             List<Claim> claims = new List<Claim>()
             {
