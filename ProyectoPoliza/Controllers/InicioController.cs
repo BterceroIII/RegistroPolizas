@@ -32,8 +32,8 @@ namespace ProyectoPoliza.Controllers
         public async Task<IActionResult> Registrarse(Usuario modelo)
         {
             modelo.Contraseña = Utilidades.EncriptarClave(modelo.Contraseña);
+            modelo.Eliminado = 0;
             Usuario usuario_creado = await _usuarioService.SaveUsuario(modelo);
-
             if (usuario_creado.IdUsuario > 0)
                 return RedirectToAction("IniciarSesion", "Inicio");
 
@@ -50,9 +50,9 @@ namespace ProyectoPoliza.Controllers
 
         [HttpPost]
 
-        public async Task<IActionResult> IniciarSesion(string correo, string clave)
+        public async Task<IActionResult> IniciarSesion(string correo, string clave, int estado)
         {
-            Usuario usuario_encontrado = await _usuarioService.GetUsuario(correo,clave /*Utilidades.EncriptarClave(clave)*/);
+            Usuario usuario_encontrado = await _usuarioService.GetUsuario(correo,Utilidades.EncriptarClave(clave), estado);
 
             if (usuario_encontrado == null)
             {

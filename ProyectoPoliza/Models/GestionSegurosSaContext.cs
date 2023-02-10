@@ -163,7 +163,7 @@ public partial class GestionSegurosSaContext : DbContext
 
             entity.Property(e => e.IdUsuario).HasColumnName("idUsuario");
             entity.Property(e => e.Contraseña)
-                .HasMaxLength(20)
+                .HasMaxLength(100)
                 .IsUnicode(false);
             entity.Property(e => e.IdEmpleado).HasColumnName("idEmpleado");
             entity.Property(e => e.Correo)

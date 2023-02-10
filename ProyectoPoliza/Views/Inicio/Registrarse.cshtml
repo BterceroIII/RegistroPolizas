@@ -26,7 +26,10 @@
                             <input class="form-control mb-3" type="text" placeholder="Nombre Completo" asp-for="oEmpleado.Nombre" required />
                             <input class="form-control mb-3" type="text" placeholder="N Cedula" asp-for="oEmpleado.Cedula" required />
                             <input class="form-control mb-3" type="number" placeholder="Telefono" asp-for="oEmpleado.Telefono" required />
-                            <input class="form-control mb-3" type="text" placeholder="Cargo" asp-for="oEmpleado.Cargo" required />
+                            <select class="form-select mb-3" aria-label="Default select example" asp-for="oEmpleado.Cargo" required>
+                                <option value="1">Tramitador</option>
+                                <option value="2">Gestor</option>
+                            </select>
                             <input class="form-control mb-3" type="email" placeholder="Correo" asp-for="Correo" required />
                             <input class="form-control mb-3" type="password" placeholder="Contraseña" asp-for="Contraseña" required />
 
