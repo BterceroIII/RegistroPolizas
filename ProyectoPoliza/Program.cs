@@ -20,6 +20,9 @@ builder.Services.AddDbContext<GestionSegurosSaContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("cadenaSQL"));
 });
 
+//Servicios CRUD Empleados
+builder.Services.AddScoped<IGenericService<Empleado>, EmpleadoService>();
+
 //agregando servicios de usuarios
 
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
