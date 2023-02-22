@@ -18,7 +18,7 @@ namespace ProyectoPoliza.Controllers
         {
             return View();
         }
-
+                
         [HttpGet]
         public async Task<IActionResult> ListaEmpleados()
         {
