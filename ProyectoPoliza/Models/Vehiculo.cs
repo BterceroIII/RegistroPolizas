@@ -31,5 +31,5 @@ public partial class Vehiculo
 
     public virtual ICollection<DetalleContrato> DetalleContratos { get; } = new List<DetalleContrato>();
 
-    public virtual Cliente? IdClienteNavigation { get; set; }
+    public  Cliente refCliente { get; set; }
 }

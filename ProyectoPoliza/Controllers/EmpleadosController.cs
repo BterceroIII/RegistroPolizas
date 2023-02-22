@@ -2,10 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using ProyectoPoliza.Models;
-using ProyectoPoliza.Models.ViewModels;
 using ProyectoPoliza.Servicios.Contrato;
-using System.Diagnostics.Contracts;
-
 namespace ProyectoPoliza.Controllers
 {
     [Authorize]
