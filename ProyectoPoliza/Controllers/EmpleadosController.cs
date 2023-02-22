@@ -2,7 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using ProyectoPoliza.Models;
+using ProyectoPoliza.Models.ViewModels;
 using ProyectoPoliza.Servicios.Contrato;
+using System.Diagnostics.Contracts;
 
 namespace ProyectoPoliza.Controllers
 {
@@ -21,9 +23,22 @@ namespace ProyectoPoliza.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> ListaEmpleado()
+        public async Task<IActionResult> ListaEmpleados()
         {
             List<Empleado> _lista = await _empleadoService.List();
+
+            //IQueryable<Empleado> queryContactoSQL = await _empleadoService.ObtenerTodos();
+
+            //List<EmpleadoVM> _lista = queryContactoSQL
+            //                                         .Select(c => new EmpleadoVM()
+            //                                         {
+            //                                             IdEmpleado = c.IdEmpleado,
+            //                                             Nombre = c.Nombre,
+            //                                             Cedula = c.Cedula,
+            //                                             Telefono = c.Telefono,
+            //                                             Cargo = c.Cargo,
+            //                                             Eliminado = c.Eliminado.Value
+            //                                         }).ToList();
 
             return StatusCode(StatusCodes.Status200OK, _lista);
         }
@@ -58,7 +73,7 @@ namespace ProyectoPoliza.Controllers
             }
         }
 
-        [HttpDelete]
+        [HttpPut]
 
         public async Task<IActionResult> EliminarEmpleado(int idEmopleado)
         {

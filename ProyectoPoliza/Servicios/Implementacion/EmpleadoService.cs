@@ -1,12 +1,15 @@
-﻿using ProyectoPoliza.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using ProyectoPoliza.Models;
 using ProyectoPoliza.Servicios.Contrato;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics.Contracts;
 
 namespace ProyectoPoliza.Servicios.Implementacion
 {
     public class EmpleadoService : IGenericService<Empleado>
     {
+        private readonly GestionSegurosSaContext _dbcontext;
         private readonly string _cadenaSQL = "";
 
         public EmpleadoService(IConfiguration configuration)
@@ -16,6 +19,7 @@ namespace ProyectoPoliza.Servicios.Implementacion
         public async Task<List<Empleado>> List()
         {
             List<Empleado> _lista = new List<Empleado>();
+
             using (var conexion = new SqlConnection(_cadenaSQL))
             {
                 conexion.Open();
@@ -33,15 +37,15 @@ namespace ProyectoPoliza.Servicios.Implementacion
                             Cedula = dr["Cedula"].ToString(),
                             Telefono = dr["Telefono"].ToString(),
                             Cargo = dr["Cargo"].ToString(),
-                            Eliminado = Convert.ToInt32(dr["Eliminado"])
-
+                            Eliminado = Convert.ToInt32(dr["Eliminado"]),
                         });
                     }
+
                 }
+
             }
 
             return _lista;
-
         }
         public async Task<bool> Save(Empleado model)
         {
@@ -117,11 +121,16 @@ namespace ProyectoPoliza.Servicios.Implementacion
                 {
                     return false;
                 }
-
             }
 
 
 
         }
+
+        //public async Task<IQueryable<Empleado>> ObtenerTodos()
+        //{
+        //    IQueryable<Empleado> queryContactoSQL = _dbcontext.Empleados;
+        //    return queryContactoSQL;
+        //}
     }
 }
