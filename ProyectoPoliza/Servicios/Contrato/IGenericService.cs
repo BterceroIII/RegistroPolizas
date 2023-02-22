@@ -1,4 +1,6 @@
-﻿namespace ProyectoPoliza.Servicios.Contrato
+﻿using ProyectoPoliza.Models;
+
+namespace ProyectoPoliza.Servicios.Contrato
 {
     public interface IGenericService<T> where T : class
     {
@@ -6,5 +8,7 @@
         Task<bool>  Save(T model);
         Task<bool>  Edit(T model);
         Task<bool>  Delete(int id);
+
+        //Task<IQueryable<T>> ObtenerTodos();
     }
 }
