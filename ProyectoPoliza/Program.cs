@@ -23,6 +23,16 @@ builder.Services.AddDbContext<GestionSegurosSaContext>(options =>
 //Servicios CRUD Empleados
 builder.Services.AddScoped<IGenericService<Empleado>, EmpleadoService>();
 
+
+
+
+
+
+
+
+//Servicios CRUD Clientes
+builder.Services.AddScoped<IGenericService<Cliente>, ClienteService>();
+
 //agregando servicios de usuarios
 
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
