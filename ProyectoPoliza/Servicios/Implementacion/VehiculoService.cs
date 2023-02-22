@@ -5,11 +5,11 @@ using System.Data;
 
 namespace ProyectoPoliza.Servicios.Implementacion
 {
-    public class CirculacionService : IGenericService<Vehiculo>
+    public class VehiculoService : IGenericService<Vehiculo>
     {
         private readonly string _cadenaSQL = "";
 
-        public CirculacionService(IConfiguration configuration)
+        public VehiculoService(IConfiguration configuration)
         {
             _cadenaSQL = configuration.GetConnectionString("CadenaSQL");
         }
