@@ -4,7 +4,7 @@
     cedula: "",
     telefono: "",
     cargo: "",
-    eliminado: 0
+/*    eliminado: 0*/
 }
 
 function MostrarEmpleados() {
@@ -20,13 +20,13 @@ function MostrarEmpleados() {
 
 
                 responseJson.forEach((empleado) => {
+                    
                     $("#tablaEmpleados tbody").append(
                         $("<tr>").append(
                             $("<td>").text(empleado.nombre),
                             $("<td>").text(empleado.cedula),
                             $("<td>").text(empleado.telefono),
                             $("<td>").text(empleado.cargo),
-                            $("<td>").text(empleado.eliminado),
                             $("<td>").append(
                                 $("<button>").addClass("btn btn-primary btn-sm boton-editar-empleado").text("Editar").data("dataEmpleado", empleado),
                                 $("<button>").addClass("btn btn-danger btn-sm ms-2 boton-eliminar-empleado").text("Eliminar").data("dataEmpleado", empleado)
@@ -121,5 +121,104 @@ $(document).on("click", ".boton-editar-empleado", function () {
    
 
     MostrarModal();
+
+})
+
+$(document).on("click", ".boton-guardar-cambios-empleado", function () {
+
+    const modelo = {
+        idEmpleado: _modeloEmpleado.idEmpleado,
+        nombre: $("#txtNombre").val(),
+        cedula: $("#txtCedula").val(),
+        telefono: $("#txtTelefono").val(),
+        cargo: $("#cboCargo").val(),
+    }
+
+
+    if (_modeloEmpleado.idEmpleado == 0) {
+
+        fetch("/Empleados/GuardarEmpleado", {
+            method: "POST",
+            headers: { "Content-Type": "application/json; charset=utf-8" },
+            body: JSON.stringify(modelo)
+        })
+            .then(response => {
+                return response.ok ? response.json() : Promise.reject(response)
+            })
+            .then(responseJson => {
+
+                if (responseJson.valor) {
+                    $("#modalEmpleado").modal("hide");
+                    Swal.fire("Listo!", "Empleado fue creado", "success");
+                    MostrarEmpleados();
+                }
+                else
+                    Swal.fire("Lo sentimos", "No se puedo crear", "error");
+            })
+
+    } else {
+
+        fetch("/Empleados/EditarEmpleado", {
+            method: "PUT",
+            headers: { "Content-Type": "application/json; charset=utf-8" },
+            body: JSON.stringify(modelo)
+        })
+            .then(response => {
+                return response.ok ? response.json() : Promise.reject(response)
+            })
+            .then(responseJson => {
+
+                if (responseJson.valor) {
+                    $("#modalEmpleado").modal("hide");
+                    Swal.fire("Listo!", "Empleado fue actualizado", "success");
+                    MostrarEmpleados();
+                }
+                else
+                    Swal.fire("Lo sentimos", "No se puedo actualizar", "error");
+            })
+
+    }
+
+
+})
+
+$(document).on("click", ".boton-eliminar-empleado", function () {
+
+    const _empleado = $(this).data("dataEmpleado");
+
+    Swal.fire({
+        title: "Esta seguro?",
+        text: `Eliminar empleado "${_empleado.nombre}"`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Si, eliminar",
+        cancelButtonText: "No, volver"
+    }).then((result) => {
+
+        if (result.isConfirmed) {
+
+            fetch(`/Empleados/EliminarEmpleado?idEmpleado=${_empleado.idEmpleado}`, {
+                method: "PUT"
+            })
+                .then(response => {
+                    return response.ok ? response.json() : Promise.reject(response)
+                })
+                .then(responseJson => {
+
+                    if (responseJson.valor) {
+                        Swal.fire("Listo!", "Empleado fue elminado", "success");
+                        MostrarEmpleados();
+                    }
+                    else
+                        Swal.fire("Lo sentimos", "No se puedo eliminar", "error");
+                })
+
+        }
+
+
+
+    })
 
 })
