@@ -107,7 +107,7 @@ namespace ProyectoPoliza.Servicios.Implementacion
             using (var conexion = new SqlConnection(_cadenaSQL))
             {
                 conexion.Open();
-                SqlCommand cmd = new SqlCommand("sp_EliminarEmpleado", conexion);
+                SqlCommand cmd = new SqlCommand("Eliminar_Empleado", conexion);
                 cmd.Parameters.AddWithValue("idEmpleado", id);
                 cmd.CommandType = CommandType.StoredProcedure;
 
