@@ -6,6 +6,7 @@
 
 
 <!-- DataTales Example -->
+
 <div class="card shadow mb-4">
     <div class="card-header py-3 bg-second-primary">
         <h6 class="m-0 font-weight-bold text-white">Lista de Circulaciones</h6>
@@ -13,7 +14,7 @@
     <div class="card-body">
         <div class="row">
             <div class="col-sm-3">
-                <button class="btn btn-success" data-toggle="modal" data-target="#modalData"><i class="fas fa-plus-circle"></i> Nueva Circulacion</button>
+                <button class="btn btn-success boton-nuevo-vehiculo" data-toggle="modal" data-target="#modalData"><i class="fas fa-plus-circle"></i> Nueva Circulacion</button>
             </div>
         </div>
         <hr />
@@ -21,23 +22,120 @@
             <div class="col-sm-12">
                 <table class="table table-bordered" id="tbdata" cellspacing="0" style="width:100%">
                     <thead>
-                         <tr>
-                        <th>Nombre Completo</th>
-                        <th>Tipo</th>
-                        <th>N Circulacion</th>
-                        <th>N Placa</th>
-                        <th>Marca</th>
-                        <th>Modelo</th>
+                        <tr>
+                            <th>Nombre Completo</th>
+                            <th>Tipo</th>
+                            <th>N Circulacion</th>
+                            <th>N Placa</th>
+                            <th>Marca</th>
+                            <th>Modelo</th>
                         </tr>
                     </thead>
                     <tbody>
-                       
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 
+    <!-- Modal -->
+    <div class="modal fade " id="modalVehiculo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal Vehiculo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="form-group col-sm-4">
+                            <label>Nombre Completo</label>
+                            <input type="text" class="form-control form-control-sm" id="txtNombre" placeholder="">
+                        </div>
+
+                        <div class="form-group col-sm-4">
+                            <label>Tipo</label>
+                            <select class="form-select" aria-label="Default select example" id="cboTipo">
+                                <option selected>Tipos de vehiculo</option>
+                                <option value="Moto">Moto</option>
+                                <option value="Carro Particular">Carro Particular</option>
+                                <option value="3">Three</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group col-sm-4">
+                            <label>Numero Circulacion</label>
+                            <input type="text" class="form-control form-control-sm" id="txtCirculacion" placeholder="">
+                        </div>
+
+                        <div class="form-group col-sm-4">
+                            <label>Numero de placa</label>
+                            <input type="text" class="form-control form-control-sm" id="txtPlaca" placeholder="">
+                        </div>
+
+                        <div class="form-group col-sm-4">
+                            <label>Marca</label>
+                            <input type="text" class="form-control form-control-sm" id="txtMarca" placeholder="">
+                        </div>
+
+                        <div class="form-group col-sm-4">
+                            <label>Modelo</label>
+                            <input type="text" class="form-control form-control-sm" id="txtModelo" placeholder="">
+                        </div>
+
+                        <div class="form-group col-sm-4">
+                            <label>Numero de Motor</label>
+                            <input type="text" class="form-control form-control-sm" id="txtMotor" placeholder="">
+                        </div>
+
+                        <div class="form-group col-sm-4">
+                            <label>Numero de chasis</label>
+                            <input type="text" class="form-control form-control-sm" id="txtChasis" placeholder="">
+                        </div>
+
+                        <div class="form-group col-sm-4">
+                            <label>Uso</label>
+                            <input type="text" class="form-control form-control-sm" id="txtUso" placeholder="">
+                        </div>
+
+                        <div class="form-group col-sm-4">
+                            <label>Año</label>
+                            <input type="number" class="form-control form-control-sm" id="txtAño" placeholder="">
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary boton-guardar-cambios-empleado">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     
+
+
+    @section Scripts
+        {
+
+        <!-- ============================================================
+        =SCRIPTS PARA ESTA PAGINA
+        ===============================================================-->
+        <script src="~/vendor/datatables/jquery.dataTables.min.js"></script>
+        <script src="~/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+        <script src="~/vendor/datatables/extensiones/js/dataTables.responsive.min.js"></script>
+
+        <script src="~/vendor/datatables/extensiones/js/dataTables.buttons.min.js"></script>
+        <script src="~/vendor/datatables/extensiones/js/jszip.min.js"></script>
+        <script src="~/vendor/datatables/extensiones/js/buttons.html5.min.js"></script>
+        <script src="~/vendor/datatables/extensiones/js/buttons.print.min.js"></script>
+
+        <script src="~/js/vistas/vehiculo/index.js"></script>
+
+        <!-- SOLO ES DE EJEMPLO - IGNORAR -->
+        @*<script src="~/js/vistas/datatables-demo.js"></script>*@
+    }
+
+
+
 
