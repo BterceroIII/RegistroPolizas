@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Clientes";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -12,22 +11,21 @@
     <div class="card-body">
         <div class="row">
             <div class="col-sm-3">
-                <button class="btn btn-success" data-toggle="modal" data-target="#modalData"><i class="fas fa-plus-circle"></i> Nueva Poliza</button>
+                <button class="btn btn-success boton-nuevo-cliente" data-toggle="modal" data-target="#modalData"><i
+                        class="fas fa-plus-circle"></i> Nuevo Cliente</button>
             </div>
         </div>
         <hr />
         <div class="row">
             <div class="col-sm-12">
-                <table class="table table-bordered" id="tbdata" cellspacing="0" style="width:100%">
+                <table class="table table-bordered" id="tablaCliente" cellspacing="0" style="width:100%">
                     <thead>
                         <tr>
+                            <td>ID</td>
                             <td>Nombre Completo</td>
                             <td>Tipo de identidad</td>
                             <td>Numero de indentidad</td>
-                            <td>Nacionalidad</td>
                             <td>Telefono</td>
-                            <td>Correo</td>
-                            <td>Direccion</td>
                             <td></td>
                         </tr>
                     </thead>
@@ -37,24 +35,93 @@
             </div>
         </div>
     </div>
-
+</div>
 <!-- Modal -->
 
-    @section Scripts
-        {
-        <!-- ============================================================
-        =SCRIPTS PARA ESTA PAGINA
-        ===============================================================-->
-        <script src="~/vendor/datatables/jquery.dataTables.min.js"></script>
-        <script src="~/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<div class="modal fade" id="modalCliente" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal Cliente</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
 
-        <script src="~/vendor/datatables/extensiones/js/dataTables.responsive.min.js"></script>
+                <div class="d-flex flex-row justify-content-evenly">
 
-        <script src="~/vendor/datatables/extensiones/js/dataTables.buttons.min.js"></script>
-        <script src="~/vendor/datatables/extensiones/js/jszip.min.js"></script>
-        <script src="~/vendor/datatables/extensiones/js/buttons.html5.min.js"></script>
-        <script src="~/vendor/datatables/extensiones/js/buttons.print.min.js"></script>
+                    <div class="  d-flex flex-column ">
+                        <div class="mb-3">
+                            <label class="form-label">Nombre Completo</label>
+                            <input type="text" class="form-control" id="txtNombre" autocomplete="off">
+                        </div>
 
-        <!-- SOLO ES DE EJEMPLO - IGNORAR -->
-        <script src="~/js/vistas/cliente/index"></script>
-    }
+                        <div class="mb-3">
+                            <label class="form-label">Tipo identidad</label>
+                            <select class="form-select" id="cboTipo">
+                                <option value="RUC">RUC</option>
+                                <option value="CEDULA">CEDULA</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Numero de indentidad</label>
+                            <input type="text" class="form-control" id="txtIdentidad">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Telefono</label>
+                            <input type="number" class="form-control" id="txtTelefono">
+                        </div>
+                    </div>
+
+                    <div class="mb-4 d-flex flex-column ">
+
+
+                        <div class="mb-3">
+                            <label class="form-label">Nacionalidad</label>
+                            <input type="text" class="form-control" id="txtNacionalidad">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Correo</label>
+                            <input type="text" class="form-control" id="txtCorreo">
+                        </div>
+
+
+                        <div class="mb-3">
+                            <label class="form-label">Direccion</label>
+                            <textarea class="form-control" id="txtDireccion" rows="3"></textarea>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary boton-guardar-cambios-cliente">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts
+    {
+    <!-- ============================================================
+            =SCRIPTS PARA ESTA PAGINA
+            ===============================================================-->
+    <script src="~/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <script src="~/vendor/datatables/extensiones/js/dataTables.responsive.min.js"></script>
+
+    <script src="~/vendor/datatables/extensiones/js/dataTables.buttons.min.js"></script>
+    <script src="~/vendor/datatables/extensiones/js/jszip.min.js"></script>
+    <script src="~/vendor/datatables/extensiones/js/buttons.html5.min.js"></script>
+    <script src="~/vendor/datatables/extensiones/js/buttons.print.min.js"></script>
+
+    <!-- SOLO ES DE EJEMPLO - IGNORAR -->
+    <script src="~/js/vistas/cliente/index.js"></script>
+}
