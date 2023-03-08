@@ -71,9 +71,9 @@ namespace ProyectoPoliza.Controllers
 
         [HttpPut]
 
-        public async Task<IActionResult> EliminarCliente(int idEmopleado)
+        public async Task<IActionResult> EliminarCliente(int idCliente)
         {
-            bool _resultado = await _clienteService.Delete(idEmopleado);
+            bool _resultado = await _clienteService.Delete(idCliente);
 
             if (_resultado)
             {
