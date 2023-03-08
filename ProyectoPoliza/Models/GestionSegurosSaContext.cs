@@ -213,7 +213,7 @@ public partial class GestionSegurosSaContext : DbContext
                 .HasMaxLength(50)
                 .IsUnicode(false);
 
-            entity.HasOne(d => d.IdClienteNavigation).WithMany(p => p.Vehiculos)
+            entity.HasOne(d => d.refCliente).WithMany(p => p.Vehiculos)
                 .HasForeignKey(d => d.IdCliente)
                 .HasConstraintName("FK_Vehiculo_Cliente");
         });
