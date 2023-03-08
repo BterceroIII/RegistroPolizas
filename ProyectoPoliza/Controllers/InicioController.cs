@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,7 @@ using System.Security.Claims;
 
 namespace ProyectoPoliza.Controllers
 {
+    [Authorize]
     public class InicioController : Controller
     {
         private readonly IUsuarioService _usuarioService;

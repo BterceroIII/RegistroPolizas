@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ProyectoPoliza.Models;
 using ProyectoPoliza.Servicios.Contrato;
 using ProyectoPoliza.Servicios.Implementacion;
 
 namespace ProyectoPoliza.Controllers
 {
+    [Authorize]
     public class ClientesController : Controller
     {
         private readonly IGenericService<Cliente> _clienteService;
