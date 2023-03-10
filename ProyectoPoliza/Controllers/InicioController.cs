@@ -13,7 +13,6 @@ using System.Security.Claims;
 
 namespace ProyectoPoliza.Controllers
 {
-    [Authorize]
     public class InicioController : Controller
     {
         private readonly IUsuarioService _usuarioService;
