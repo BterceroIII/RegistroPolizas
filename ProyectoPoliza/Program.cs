@@ -36,6 +36,9 @@ builder.Services.AddScoped<IGenericService<Vehiculo>, VehiculoService>();
 //Servicios CRUD Clientes
 builder.Services.AddScoped<IGenericService<Cliente>, ClienteService>();
 
+//Servicios CRUD Vehiculo
+builder.Services.AddScoped<IGenericService<Vehiculo>, VehiculoService>();
+
 //agregando servicios de usuarios
 
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
