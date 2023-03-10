@@ -1,8 +1,13 @@
-﻿using Microsoft.AspNetCore.Authorization;
+
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProyectoPoliza.Models;
 using ProyectoPoliza.Servicios.Contrato;
 using ProyectoPoliza.Servicios.Implementacion;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+
 
 namespace ProyectoPoliza.Controllers
 {
