@@ -17,38 +17,47 @@ namespace ProyectoPoliza.Servicios.Implementacion
         public async Task<List<Vehiculo>> List()
         {
             List<Vehiculo> _lista = new List<Vehiculo>();
-
-            using (var conexion = new SqlConnection(_cadenaSQL))
+            try
             {
-                conexion.Open();
-                SqlCommand cmd = new SqlCommand("Mostrar_Vehiculo", conexion);
-                cmd.CommandType = CommandType.StoredProcedure;
-
-                using (var dr = await cmd.ExecuteReaderAsync())
+                using (var conexion = new SqlConnection(_cadenaSQL))
                 {
-                    while (await dr.ReadAsync())
+                    conexion.Open();
+                    SqlCommand cmd = new SqlCommand("Mostrar_Vehiculo", conexion);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    using (var dr = await cmd.ExecuteReaderAsync())
                     {
-                        _lista.Add(new Vehiculo()
+                        while (await dr.ReadAsync())
                         {
-                            IdVehiculo = Convert.ToInt32(dr["idVehiculo"]),
-                            refCliente = new Cliente()
+                            _lista.Add(new Vehiculo()
                             {
-                                IdCliente = Convert.ToInt32(dr["idCliente"]),
-                                NombreCliente = dr["NombreCliente"].ToString()
-                            },
-                            Tipo = dr["idVehiculo"].ToString(),
-                            NoCirculacion = dr["NoCirculacion"].ToString(),
-                            NoPlaca = dr["NoPlaca"].ToString(),
-                            Marca = dr["Marca"].ToString(),
-                            Modelo = dr["Modelo"].ToString(),
-                            NoMotor = dr["NoMotor"].ToString(),
-                            NoChasis = dr["NoChasis"].ToString(),
-                            Uso = dr["Uso"].ToString(),
-                            Eliminado = Convert.ToInt32(dr["Eliminado"]),
-                        }); 
+                                IdVehiculo = Convert.ToInt32(dr["idVehiculo"]),
+                                refCliente = new Cliente()
+                                {
+                                    //IdCliente = Convert.ToInt32(dr["idCliente"]),
+                                    NombreCliente = dr["NombreCliente"].ToString()
+                                },
+                                Tipo = dr["Tipo"].ToString(),
+                                NoCirculacion = dr["NoCirculacion"].ToString(),
+                                NoPlaca = dr["NoPlaca"].ToString(),
+                                Marca = dr["Marca"].ToString(),
+                                Modelo = dr["Modelo"].ToString(),
+                                NoMotor = dr["NoMotor"].ToString(),
+                                NoChasis = dr["NoChasis"].ToString(),
+                                Uso = dr["Uso"].ToString(),
+                                Año = dr["Año"].ToString()
+                                //Eliminado = Convert.ToInt32(dr["Eliminado"]),
+                            });
+                        }
                     }
                 }
             }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            
                 
             return _lista;
         }

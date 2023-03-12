@@ -20,15 +20,15 @@
         <hr />
         <div class="row">
             <div class="col-sm-12">
-                <table class="table table-bordered" id="tbdata" cellspacing="0" style="width:100%">
+                <table class="table table-bordered" id="tablaVehiculo" cellspacing="0" style="width:100%">
                     <thead>
                         <tr>
-                            <th>Nombre Completo</th>
+                            <th>ID</th>
+                            <th>Propietario</th>
                             <th>Tipo</th>
                             <th>N Circulacion</th>
                             <th>N Placa</th>
-                            <th>Marca</th>
-                            <th>Modelo</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -49,7 +49,7 @@
                 <div class="modal-body">
                     <div class="form-row">
                         <div class="form-group col-sm-4">
-                            <label>Nombre Completo</label>
+                            <label>Propietario</label>
                             <input type="text" class="form-control form-control-sm" id="txtNombre" placeholder="">
                         </div>
 
@@ -105,7 +105,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary boton-guardar-cambios-empleado">Guardar</button>
+                    <button type="button" class="btn btn-primary boton-guardar-cambios-vehiculo">Guardar</button>
                 </div>
             </div>
         </div>
@@ -131,6 +131,7 @@
         <script src="~/vendor/datatables/extensiones/js/buttons.print.min.js"></script>
 
         <script src="~/js/vistas/vehiculo/index.js"></script>
+
 
         <!-- SOLO ES DE EJEMPLO - IGNORAR -->
         @*<script src="~/js/vistas/datatables-demo.js"></script>*@
