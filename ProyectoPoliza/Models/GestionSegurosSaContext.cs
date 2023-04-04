@@ -149,7 +149,7 @@ public partial class GestionSegurosSaContext : DbContext
             entity.Property(e => e.Codigo)
                 .HasMaxLength(50)
                 .IsUnicode(false);
-            entity.Property(e => e.EmpresaProveedora)
+            entity.Property(e => e.Aseguradora)
                 .HasMaxLength(150)
                 .IsUnicode(false);
             entity.Property(e => e.Tipo)
