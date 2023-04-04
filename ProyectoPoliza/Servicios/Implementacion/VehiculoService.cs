@@ -34,11 +34,10 @@ namespace ProyectoPoliza.Servicios.Implementacion
                                 IdVehiculo = Convert.ToInt32(dr["idVehiculo"]),
                                 refCliente = new Cliente()
                                 {
-                                    //IdCliente = Convert.ToInt32(dr["idCliente"]),
+                                    IdCliente = Convert.ToInt32(dr["idCliente"]),
                                     NombreCliente = dr["NombreCliente"].ToString()
                                 },
                                 Tipo = dr["Tipo"].ToString(),
-                                NoCirculacion = dr["NoCirculacion"].ToString(),
                                 NoPlaca = dr["NoPlaca"].ToString(),
                                 Marca = dr["Marca"].ToString(),
                                 Modelo = dr["Modelo"].ToString(),
@@ -68,9 +67,8 @@ namespace ProyectoPoliza.Servicios.Implementacion
             {
                 conexion.Open();
                 SqlCommand cmd = new SqlCommand("Insertar_Vehiculo", conexion);
-                cmd.Parameters.AddWithValue("idCliente", model.refCliente.NombreCliente);
+                cmd.Parameters.AddWithValue("idCliente", model.refCliente.IdCliente);
                 cmd.Parameters.AddWithValue("Tipo", model.Tipo);
-                cmd.Parameters.AddWithValue("NoCirculacion", model.NoCirculacion);
                 cmd.Parameters.AddWithValue("NoPlaca", model.NoPlaca);
                 cmd.Parameters.AddWithValue("Marca", model.Marca);
                 cmd.Parameters.AddWithValue("Modelo", model.Modelo);
@@ -99,31 +97,40 @@ namespace ProyectoPoliza.Servicios.Implementacion
         {
             using (var conexion = new SqlConnection(_cadenaSQL))
             {
-                conexion.Open();
-                SqlCommand cmd = new SqlCommand("Modificar_Vehiculo", conexion);
-                cmd.Parameters.AddWithValue("idCliente", model.refCliente.NombreCliente);
-                cmd.Parameters.AddWithValue("Tipo", model.Tipo);
-                cmd.Parameters.AddWithValue("NoCirculacion", model.NoCirculacion);
-                cmd.Parameters.AddWithValue("NoPlaca", model.NoPlaca);
-                cmd.Parameters.AddWithValue("Marca", model.Marca);
-                cmd.Parameters.AddWithValue("Modelo", model.Modelo);
-                cmd.Parameters.AddWithValue("NoMotor", model.NoMotor);
-                cmd.Parameters.AddWithValue("NoChasis", model.NoChasis);
-                cmd.Parameters.AddWithValue("Uso", model.Uso);
-                cmd.Parameters.AddWithValue("Año", model.Año);
-
-                cmd.CommandType = CommandType.StoredProcedure;
-
-                int filas_afectadas = await cmd.ExecuteNonQueryAsync();
-
-                if (filas_afectadas > 0)
+                try
                 {
-                    return true;
+                    conexion.Open();
+                    SqlCommand cmd = new SqlCommand("Modificar_Vehiculo", conexion);
+                    cmd.Parameters.AddWithValue("idVehiculo", model.IdVehiculo);
+                    cmd.Parameters.AddWithValue("idCliente", model.refCliente.IdCliente);
+                    cmd.Parameters.AddWithValue("Tipo", model.Tipo);
+                    cmd.Parameters.AddWithValue("NoPlaca", model.NoPlaca);
+                    cmd.Parameters.AddWithValue("Marca", model.Marca);
+                    cmd.Parameters.AddWithValue("Modelo", model.Modelo);
+                    cmd.Parameters.AddWithValue("NoMotor", model.NoMotor);
+                    cmd.Parameters.AddWithValue("NoChasis", model.NoChasis);
+                    cmd.Parameters.AddWithValue("Uso", model.Uso);
+                    cmd.Parameters.AddWithValue("Año", model.Año);
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    int filas_afectadas = await cmd.ExecuteNonQueryAsync();
+
+                    if (filas_afectadas > 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    return false;
+
+                    throw ex;
                 }
+                
 
             }
         }
