@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace ProyectoPoliza.Controllers
 {
-    //[Authorize]
+    [Authorize]
 
     public class HomeController : Controller
     {
