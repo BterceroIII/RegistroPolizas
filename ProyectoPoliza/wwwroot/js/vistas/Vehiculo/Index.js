@@ -2,12 +2,12 @@
     idVehiculo: 0,
     idCliente: 0,
     tipo: "",
-    circulacion: "",
-    placa: "",
+    noCirculacion: "",
+    noPlaca: "",
     marca: "",
     modelo: "",
-    motor: "",
-    chasis: "",
+    noMotor: "",
+    noChasis: "",
     uso: "",
     año: "",
     /*    eliminado: 0*/
@@ -30,13 +30,10 @@ function MostrarVehiculo() {
                     $("#tablaVehiculo tbody").append(
                         $("<tr>").append(
                             $("<td>").text(vehiculo.idVehiculo),
-                            $("<td>").text(vehiculo.idCliente),
+                            $("<td>").text(vehiculo.refCliente.nombreCliente),
                             $("<td>").text(vehiculo.tipo),
                             $("<td>").text(vehiculo.modelo),
-                            $("<td>").text(vehiculo.placa),
-                            $("<td>").text(vehiculo.marca),
-                            $("<td>").text(vehiculo.uso),
-                            $("<td>").text(vehiculo.año),
+                            $("<td>").text(vehiculo.noPlaca),
 
                             $("<td>").append(
                                 $("<button>").addClass("btn btn-primary btn-sm boton-editar-vehiculo").text("Editar").data("dataVehiculo", vehiculo),
@@ -55,46 +52,194 @@ function MostrarVehiculo() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
+
     MostrarVehiculo();
+
+    fetch("/Clientes/ListaClientes")
+        .then(response => {
+            return response.ok ? response.json() : Promise.reject(response)
+        })
+        .then(responseJson => {
+
+            if (responseJson.length > 0) {
+                responseJson.forEach((item) => {
+
+                    $("#cboNombre").append(
+                        $("<option>").val(item.idCliente).text(item.nombreCliente)
+                    )
+
+                })
+            }
+
+        })
+
 
 
 }, false)
 
 
 
-
-//function MostrarModal() {
-
-//    $("#txtNombre").val(_modeloVehiculo.idCliente);
-//    $("#cboTipo").val(_modeloVehiculo.tipo);
-//    $("#txtCirculacion").val(_modeloVehiculo.circulacion);
-//    $("#txtPlaca").val(_modeloVehiculo.placa);
-//    $("#txtMarca").val(_modeloVehiculo.marca);
-//    $("#txtModelo").val(_modeloVehiculo.modelo);
-//    $("#txtMotor").val(_modeloVehiculo.motor);
-//    $("#txtChasis").val(_modeloVehiculo.chasis); 
-//    $("#txtUso").val(_modeloVehiculo.uso);
-//    $("#txtAño").val(_modeloVehiculo.año);
-
+function MostrarModal() {
+    $("#cboNombre").val(_modeloVehiculo.idCliente == 0 ? $("#cboNombre option:first").val() : _modeloVehiculo.idCliente)
+   /* $("#cboNombre").val(_modeloVehiculo.idCliente == 0 ? $("#cboNombre").text() : _modeloVehiculo.idCliente);*/
+    $("#cboTipo").val(_modeloVehiculo.tipo);
+    $("#txtCirculacion").val(_modeloVehiculo.noCirculacion);
+    $("#txtPlaca").val(_modeloVehiculo.noPlaca);
+    $("#txtMarca").val(_modeloVehiculo.marca);
+    $("#txtModelo").val(_modeloVehiculo.modelo);
+    $("#txtMotor").val(_modeloVehiculo.noMotor);
+    $("#txtChasis").val(_modeloVehiculo.noChasis);
+    $("#txtUso").val(_modeloVehiculo.uso);
+    $("#txtAño").val(_modeloVehiculo.año);
 
 
-//    $("#modalVehiculo").modal("show");
 
-//}
+    $("#modalVehiculo").modal("show");
 
-//$(document).on("click", ".boton-nuevo-vehiculo", function () {
+}
 
-//    _modeloVehiculo.idCliente = 0,
-//    _modeloVehiculo.tipo = "",
-//    _modeloVehiculo.circulacion = "", 
-//    _modeloVehiculo.placa = "",
-//    _modeloVehiculo.marca = "",
-//    _modeloVehiculo.modelo = "",
-//    _modeloVehiculo.motor = "",
-//    _modeloVehiculo.chasis = "",
-//    _modeloVehiculo.uso = "",
-//    _modeloVehiculo.año = "",
+$(document).on("click", ".boton-nuevo-vehiculo", function () {
 
-//    MostrarModal();
+        _modeloVehiculo.idCliente = 0,
+        _modeloVehiculo.tipo = "",
+        _modeloVehiculo.noCirculacion = "",
+        _modeloVehiculo.noPlaca = "",
+        _modeloVehiculo.marca = "",
+        _modeloVehiculo.modelo = "",
+        _modeloVehiculo.noMotor = "",
+        _modeloVehiculo.noChasis = "",
+        _modeloVehiculo.uso = "",
+        _modeloVehiculo.año = "",
 
-//})
+        MostrarModal();
+
+})
+
+$(document).on("click", ".boton-editar-vehiculo", function () {
+
+    const _vehiculo = $(this).data("dataVehiculo");
+
+
+    _modeloVehiculo.idVehiculo = _vehiculo.idVehiculo;
+    _modeloVehiculo.idCliente = _vehiculo.refCliente.idCliente;
+    _modeloVehiculo.tipo = _vehiculo.tipo;
+    _modeloVehiculo.noCirculacion = _vehiculo.noCirculacion;
+    _modeloVehiculo.noPlaca = _vehiculo.noPlaca;
+    _modeloVehiculo.marca = _vehiculo.marca;
+    _modeloVehiculo.modelo = _vehiculo.modelo;
+    _modeloVehiculo.noMotor = _vehiculo.noMotor;
+    _modeloVehiculo.noChasis = _vehiculo.noChasis;
+    _modeloVehiculo.uso = _vehiculo.uso;
+    _modeloVehiculo.año = _vehiculo.año;
+
+
+    MostrarModal();
+
+})
+
+$(document).on("click", ".boton-guardar-cambios-vehiculo", function () {
+
+    const modelo = {
+
+        idVehiculo: _modeloVehiculo.idVehiculo,
+        refCliente: {
+            idCliente: $("#cboNombre").val()
+        },
+        tipo: $("#cboTipo").val(),
+        noPlaca: $("#txtPlaca").val(),
+        marca: $("#txtMarca").val(),
+        modelo: $("#txtModelo").val(),
+        noMotor: $("#txtMotor").val(),
+        noChasis: $("#txtChasis").val(),
+        uso: $("#txtUso").val(),
+        año: $("#txtAño").val(),
+    }
+
+
+    if (_modeloVehiculo.idVehiculo == 0) {
+
+        fetch("/Circulaciones/GuardarVehiculo", {
+            method: "POST",
+            headers: { "Content-Type": "application/json; charset=utf-8" },
+            body: JSON.stringify(modelo)
+        })
+            .then(response => {
+                return response.ok ? response.json() : Promise.reject(response)
+            })
+            .then(responseJson => {
+
+                if (responseJson.valor) {
+                    $("#modalVehiculo").modal("hide");
+                    Swal.fire("Listo!", "Vehiculo fue creado", "success");
+                    MostrarVehiculo();
+                }
+                else
+                    Swal.fire("Lo sentimos", "No se puedo crear", "error");
+            })
+
+    } else {
+
+        fetch("/Circulaciones/EditarVehiculo", {
+            method: "PUT",
+            headers: { "Content-Type": "application/json; charset=utf-8" },
+            body: JSON.stringify(modelo)
+        })
+            .then(response => {
+                return response.ok ? response.json() : Promise.reject(response)
+            })
+            .then(responseJson => {
+
+                if (responseJson.valor) {
+                    $("#modalVehiculo").modal("hide");
+                    Swal.fire("Listo!", "Vehiculo fue actualizado", "success");
+                    MostrarVehiculo();
+                }
+                else
+                    Swal.fire("Lo sentimos", "No se puedo actualizar", "error");
+            })
+
+    }
+
+
+})
+
+$(document).on("click", ".boton-eliminar-vehiculo", function () {
+
+    const _vehiculo = $(this).data("dataVehiculo");
+
+    Swal.fire({
+        title: "Esta seguro?",
+        text: `Eliminar Vehiculo "${_vehiculo.noPlaca}"`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Si, eliminar",
+        cancelButtonText: "No, volver"
+    }).then((result) => {
+
+        if (result.isConfirmed) {
+
+            fetch(`/Circulaciones/EliminarVehiculo?idVehiculo=${_vehiculo.idVehiculo}`, {
+                method: "PUT"
+            })
+                .then(response => {
+                    return response.ok ? response.json() : Promise.reject(response)
+                })
+                .then(responseJson => {
+
+                    if (responseJson.valor) {
+                        Swal.fire("Listo!", "Vehiculo fue elminado", "success");
+                        MostrarVehiculo();
+                    }
+                    else
+                        Swal.fire("Lo sentimos", "No se puedo eliminar", "error");
+                })
+
+        }
+
+
+
+    })
+
+})

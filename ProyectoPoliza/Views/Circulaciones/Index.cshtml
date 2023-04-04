@@ -26,7 +26,7 @@
                             <th>ID</th>
                             <th>Propietario</th>
                             <th>Tipo</th>
-                            <th>N Circulacion</th>
+                            <th>Modelo</th>
                             <th>N Placa</th>
                             <th></th>
                         </tr>
@@ -50,22 +50,16 @@
                     <div class="form-row">
                         <div class="form-group col-sm-4">
                             <label>Propietario</label>
-                            <input type="text" class="form-control form-control-sm" id="txtNombre" placeholder="">
+                            <select size="5" class="form-select" id="cboNombre" autocomplete="off" onscroll=""></select>
                         </div>
 
                         <div class="form-group col-sm-4">
                             <label>Tipo</label>
                             <select class="form-select" aria-label="Default select example" id="cboTipo">
-                                <option selected>Tipos de vehiculo</option>
-                                <option value="Moto">Moto</option>
+                                <option value="MOTO">MOTO</option>
                                 <option value="Carro Particular">Carro Particular</option>
                                 <option value="3">Three</option>
                             </select>
-                        </div>
-
-                        <div class="form-group col-sm-4">
-                            <label>Numero Circulacion</label>
-                            <input type="text" class="form-control form-control-sm" id="txtCirculacion" placeholder="">
                         </div>
 
                         <div class="form-group col-sm-4">
