@@ -2,7 +2,7 @@ const _modeloPoliza = {
     idPoliza: 0,
     aseguradora: "",
     tipo: "",
-    codigo: "",
+    codigo: ""
 };
 
 function MostrarPoliza() {
@@ -22,9 +22,9 @@ function MostrarPoliza() {
                     $("#tablaPoliza tbody").append(
                         $("<tr>").append(
                             $("<td>").text(poliza.idPoliza),
+                            $("<td>").text(poliza.codigo),
                             $("<td>").text(poliza.aseguradora),
                             $("<td>").text(poliza.tipo),
-                            $("<td>").text(poliza.codigo),
                             $("<td>").append(
                                 $("<button>").addClass("btn btn-primary btn-sm boton-editar-poliza").text("Editar").data("dataPoliza", poliza),
                                 $("<button>").addClass("btn btn-danger btn-sm ms-2 boton-eliminar-poliza").text("Eliminar").data("dataPoliza", poliza)
