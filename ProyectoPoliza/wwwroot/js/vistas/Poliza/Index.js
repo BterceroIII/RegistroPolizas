@@ -86,3 +86,96 @@ $(document).on("click", ".boton-editar-poliza", function () {
     MostrarModal();
 
 })
+
+$(document).on("click", ".boton-guardar-cambios-poliza", function () {
+
+    const modelo = {
+        idPoliza: _modeloPoliza.idPoliza,
+        aseguradora: $("#cboAseguradora").val(),
+        tipo: $("#cboTipo").val(),
+        codigo: $("#txtCodigo").val(),
+    }
+
+
+    if (_modeloPoliza.idPoliza == 0) {
+
+        fetch("/Polizas/GuardarPoliza", {
+            method: "POST",
+            headers: { "Content-Type": "application/json; charset=utf-8" },
+            body: JSON.stringify(modelo)
+        })
+            .then(response => {
+                return response.ok ? response.json() : Promise.reject(response)
+            })
+            .then(responseJson => {
+
+                if (responseJson.valor) {
+                    $("#modalPoliza").modal("hide");
+                    Swal.fire("Listo!", "Poliza fue creado", "success");
+                    MostrarPoliza();
+                }
+                else
+                    Swal.fire("Lo sentimos", "No se puedo crear", "error");
+            })
+
+    } else {
+
+        fetch("/Polizas/EditarPoliza", {
+            method: "PUT",
+            headers: { "Content-Type": "application/json; charset=utf-8" },
+            body: JSON.stringify(modelo)
+        })
+            .then(response => {
+                return response.ok ? response.json() : Promise.reject(response)
+            })
+            .then(responseJson => {
+
+                if (responseJson.valor) {
+                    $("#modalPoliza").modal("hide");
+                    Swal.fire("Listo!", "Poliza fue actualizado", "success");
+                    MostrarPoliza();
+                }
+                else
+                    Swal.fire("Lo sentimos", "No se puedo actualizar", "error");
+            })
+
+    }
+
+
+})
+
+$(document).on("click", ".boton-eliminar-poliza", function () {
+
+    const _poliza = $(this).data("dataPoliza");
+
+    Swal.fire({
+        title: "Esta seguro?",
+        text: `Eliminar poliza Numero"${_poliza.codigo}"`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Si, eliminar",
+        cancelButtonText: "No, volver"
+    }).then((result) => {
+
+        if (result.isConfirmed) {
+
+            fetch(`/Polizas/EliminarPoliza?idPoliza=${_poliza.idPoliza}`, {
+                method: "PUT"
+            })
+                .then(response => {
+                    return response.ok ? response.json() : Promise.reject(response)
+                })
+                .then(responseJson => {
+
+                    if (responseJson.valor) {
+                        Swal.fire("Listo!", "Poliza fue elminado", "success");
+                        MostrarPoliza();
+                    }
+                    else
+                        Swal.fire("Lo sentimos", "No se puedo eliminar", "error");
+                })
+        }
+    })
+})
