@@ -9,7 +9,7 @@ public partial class Poliza
 
     public string? Codigo { get; set; }
 
-    public string? EmpresaProveedora { get; set; }
+    public string? Aseguradora { get; set; }
 
     public string? Tipo { get; set; }
 
