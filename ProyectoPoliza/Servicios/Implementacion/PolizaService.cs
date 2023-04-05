@@ -71,12 +71,10 @@ namespace ProyectoPoliza.Servicios.Implementacion
 
         public async Task<bool> Edit(Poliza model)
         {
-            try
-            {
                 using (var conexion = new SqlConnection(_cadenaSQL))
                 {
                     conexion.Open();
-                    SqlCommand cmd = new SqlCommand("Modificar_Poliza", conexion);
+                    SqlCommand cmd = new SqlCommand("Modificar_Polizas", conexion);
                     cmd.Parameters.AddWithValue("idPoliza", model.IdPoliza);
                     cmd.Parameters.AddWithValue("codigo", model.Codigo);
                     cmd.Parameters.AddWithValue("aseguradora", model.Aseguradora);
@@ -96,14 +94,9 @@ namespace ProyectoPoliza.Servicios.Implementacion
                     }
 
                 }
-            }
-            catch (Exception e)
-            {
-
-                throw e;
+              
             }
             
-        }
 
         public async Task<bool> Delete(int id)
         {

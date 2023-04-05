@@ -2,7 +2,7 @@ const _modeloPoliza = {
     idPoliza: 0,
     aseguradora: "",
     tipo: "",
-    codigo: ""
+    codigo: "",
 };
 
 function MostrarPoliza() {
@@ -77,7 +77,7 @@ $(document).on("click", ".boton-editar-poliza", function () {
     const _poliza = $(this).data("dataPoliza");
 
 
-    _modeloPoliza.idPoliza = _poliza.idEmpleado;
+    _modeloPoliza.idPoliza = _poliza.idPoliza;
     _modeloPoliza.aseguradora = _poliza.aseguradora;
     _modeloPoliza.tipo = _poliza.tipo;
     _modeloPoliza.codigo = _poliza.codigo;
