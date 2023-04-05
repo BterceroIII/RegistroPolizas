@@ -71,29 +71,38 @@ namespace ProyectoPoliza.Servicios.Implementacion
 
         public async Task<bool> Edit(Poliza model)
         {
-            using (var conexion = new SqlConnection(_cadenaSQL))
+            try
             {
-                conexion.Open();
-                SqlCommand cmd = new SqlCommand("Insertar_Poliza", conexion);
-                cmd.Parameters.AddWithValue("idPoliza", model.IdPoliza);
-                cmd.Parameters.AddWithValue("codigo", model.Codigo);
-                cmd.Parameters.AddWithValue("aseguradora", model.Aseguradora);
-                cmd.Parameters.AddWithValue("tipo", model.Tipo);
-
-                cmd.CommandType = CommandType.StoredProcedure;
-
-                int filas_afectadas = await cmd.ExecuteNonQueryAsync();
-
-                if (filas_afectadas > 0)
+                using (var conexion = new SqlConnection(_cadenaSQL))
                 {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                    conexion.Open();
+                    SqlCommand cmd = new SqlCommand("Modificar_Poliza", conexion);
+                    cmd.Parameters.AddWithValue("idPoliza", model.IdPoliza);
+                    cmd.Parameters.AddWithValue("codigo", model.Codigo);
+                    cmd.Parameters.AddWithValue("aseguradora", model.Aseguradora);
+                    cmd.Parameters.AddWithValue("tipo", model.Tipo);
 
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    int filas_afectadas = await cmd.ExecuteNonQueryAsync();
+
+                    if (filas_afectadas > 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+
+                }
             }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+            
         }
 
         public async Task<bool> Delete(int id)
